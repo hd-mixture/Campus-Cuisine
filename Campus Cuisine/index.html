@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Cuisine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="shortcut icon" href="img/Campus Cuisin Logo 16x.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+    <!-- <link rel="stylesheet" href="menustyle.css"> -->
+</head>
+
+<body>
+
+    <div class="loader-container" id="loaderContainer">
+        <video width="150" height="150" autoplay loop muted>
+            <source src="loader.webm" type="video/webm">
+            Your browser does not support the WebM video format.
+        </video>
+    </div>
+
+    <!-- <iframe src="https://lottie.host/embed/9cf6e275-8e7b-445b-8d29-fc4eeb1a7a40/q2aSEVH45j.json" class="loader-container" id="loaderContainer" height="50px" width="50px"></iframe> -->
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <header>
+        <nav class="navbar">
+            <img src="img/logo.png" class="logo" alt="">
+            <ul class="links-container">
+                <li class="link-items" id="menu-button"><a href="#restaurent-container" class="links">Menu</a></li>
+                <li class="link-items"><a href="#restaurent-section" class="links">Order</a></li>
+                <li class="link-items"><a href="#about-section" class="links">review</a></li>
+                <li class="link-items"><a href="#faq-section" class="links">help</a></li>
+                <li class="link-items"><a href="#" class="links">about</a></li>
+            </ul>
+
+            <div class="nav-extras">
+                <div class="search">
+                    <input type="text" class="search-box" placeholder="Search restaurant">
+                    <button class="search-btn"><i class='bx bx-search-alt-2'></i></i></button>
+                </div>
+
+                <a href="#" class="cart"><i class='bx bxs-cart'></i><span class="cart-count">0</span></a>
+
+                <a href="#" class="userlogin" id="btnLogin-popup">
+                    <i class='bx bx-user' id="profilePhoto"></i><i class='bx bxs-user' id="userIcon"></i>
+                </a>
+
+                <div class="wrapper" id="popup">
+                    <span class="icon-close">
+                        <i class='bx bx-x'></i>
+                    </span>
+
+                    <div class="form-box login">
+                        <form action="#">
+                            <h1>Login</h1>
+                            <div class="input-box">
+                                <input type="Username" required>
+                                <label>Username</label>
+                                <i class='bx bxs-user'></i>
+                            </div>
+                            <div class="input-box">
+                                <input type="Password" required>
+                                <label>Password</label>
+                                <i class='bx bxs-lock-alt'></i>
+                            </div>
+                            <div class="remember-forget">
+                                <label><input type="checkbox"> Remember me</label>
+                                <a href="#">Forgot password?</a>
+                            </div>
+
+                            <button class="btn" onclick="login()">Login</button>
+                            <div class="login-register">
+                                <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                            </div>
+                            <div class="Admin-login">
+                                <p> <a href="#" class="admin-loginlink">Admin Login</a></p>
+                                <p>or login with</p>
+                            </div>
+                            <div class="socialicon">
+                                <ul>
+                                    <li class="item">
+                                        <a href="#" id="googlelogin">
+                                            <i class="icong"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="item">
+                                        <a href="#">
+                                            <i class="fa-brands fa-facebook icon"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="form-box register">
+                        <form action="#">
+                            <h1>Registration</h1>
+                            <div class="input-box">
+                                <input type="email" id="email" required>
+                                <label>Email</label>
+                                <i class='bx bx-envelope'></i>
+                            </div>
+                            <div class="input-box">
+                                <input type="Username" id="username" required>
+                                <label>Username</label>
+                                <i class='bx bxs-user'></i>
+                            </div>
+                            <div class="input-box">
+                                <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+                                <!-- <i class="fa-solid fa-eye-slash"></i> -->
+                                <input type="password" id="password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}"
+                                    title="Must contain at least one number, one uppercase and lowercase letter, one special character, and at least 8 characters required"
+                                    required>
+                                <label for="password">Password</label>
+                                <i class='bx bxs-lock-alt'></i>
+                            </div>
+                            <div class="remember-forget">
+                                <label><input type="checkbox"> I agee to the terms & conditions</label>
+                            </div>
+
+                            <button class="btn" onclick="register()">Register</button>
+                            <div class="login-register">
+                                <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <script src="login.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+                <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+                <script src="logindb.js"></script>
+
+
+                <div class="nav-toggler">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <main id="hero-section">
+
+            <div class="hero-content">
+                <h1 class="hero-heading">Eat the best</h1>
+                <p class="hero-line"> Explore and understand the more amazing</p>
+
+                <div class="search location">
+                    <input type="text" class="search-box" placeholder="Search restaurant">
+                    <button class="search-btn locate-btn"><i class='bx bx-current-location'></i></button>
+                </div>
+
+                <div class="hero-action-btn-container">
+                    <button class="btn">Order Food</button>
+                    <p class="or">or</p>
+                    <button class="btn transparent">Make reservation</button>
+                </div>
+
+            </div>
+
+            <!--hero image container-->
+            <div class="hero-img-container">
+                <div class="backgrounr-ele" data-aos="fade-in" data-aos-delay="700">
+                    <div class="ellipse"></div>
+                    <div class="ellipse"></div>
+                    <div class="ellipse"></div>
+                </div>
+                <div class="forground-elements">
+                    <img src="img/hero-biryani.png" data-aos="zoom-in" data-aos-delay="0" class="hero-img" alt="">
+                    <img src="img/hero-burger.png" data-aos="zoom-in" data-aos-delay="150" class="hero-img" alt="">
+                    <img src="img/hero-pizza.png" data-aos="zoom-in" data-aos-delay="300" class="hero-img" alt="">
+
+                    <div class="review-box" data-aos="zoom-in" data-aos-delay="450">
+                        <div class="review-info" data-aos="zoom-out" data-aos-delay="600">
+                            <img src="img/user-1.png" class="reviewer-img" alt="">
+                            <div class="reviewer">
+                                <div class="reviewer-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star-half'></i>
+                                    <p>4.5</p>
+                                </div>
+                                <h2 class="reviewer-name">Customer</h2>
+                            </div>
+                        </div>
+                        <div class="review-body" data-aos="zoom-out" data-aos-delay="650">
+                            <i class='bx bxs-quote-left'></i>
+                            <p class="review">The Restaurent was good. Staff was very wlcoming and helping nature and
+                                well maintained dress up.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </header>
+
+    <section id="restaurent-section">
+
+        <div class="leaf-layer right" data-aos="zoom-in-up">
+            <img src="img/leafs.png" alt="">
+        </div>
+
+        <div class="section">
+
+            <div class="food-image-container">
+                <div class="circle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="circle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="food-img-animation-wrapper" data-aos="fade">
+                    <img src="img/food-1.png" class="food-img" alt="">
+                    <img src="img/food-2.png" class="food-img" alt="">
+                    <img src="img/food-3.png" class="food-img" alt="">
+                    <img src="img/food-4.png" class="food-img" alt="">
+                    <img src="img/food-5.png" class="food-img" alt="">
+                    <img src="img/food-6.png" class="food-img" alt="">
+                    <img src="img/food-7.png" class="food-img" alt="">
+                </div>
+            </div>
+
+            <div class="section-detail">
+                <span class="section-highlight"> From professional chef</span>
+                <p class="section-title">1000+</p>
+                <p class="section-info">Order from 1000+ food and beverages menu. Food for every taste and mood which
+                    give you an extra ordinary taste.</p>
+
+                <button class="btn">order food</button>
+            </div>
+        </div>
+
+        <div class="restaurent-container" id="restaurent-container">
+            <div class="restaurant">
+                <p class="discount">50% off</p>
+                <div class="restaurant-thumbnail">
+                    <img src="img/restaurant-1.png" class="restaurant-img" alt="">
+                </div>
+                <div class="restaurant-body">
+                    <h3 class="restaurant-name">restaurant 01</h3>
+
+                    <p class="menu">Burger, Fries, Nuggets</p>
+                    <p class="place">New York</p>
+                    <span class="raiting">4.2<i class='bx bxs-star'></i></span>
+
+                    <div class="menu-button">
+                        <button class="aboutMe">Add to cart</button>
+                        <button class="hireMe">-</button>
+                    </div>
+
+                    <div id="cartModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Cart Items</h2>
+                            <ul id="cartItemsList">
+                                <!-- Cart items will be added here -->
+                            </ul>
+                            <button id="downloadReceiptButton"><i class='bx bx-download download-symbol'></i></button>
+                            <button id="placeOrderButton">Place Order</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="restaurant">
+                <p class="discount">50% off</p>
+                <div class="restaurant-thumbnail">
+                    <img src="img/restaurant-2.png" class="restaurant-img" alt="">
+                </div>
+                <div class="restaurant-body">
+                    <h3 class="restaurant-name">restaurant 02</h3>
+
+                    <p class="menu">Burger, Fries, Nuggets</p>
+                    <p class="place">New York</p>
+                    <span class="raiting">4.2<i class='bx bxs-star'></i></span>
+                    
+                    <div class="menu-button">
+                        <button class="aboutMe">Add to cart</button>
+                        <button class="hireMe">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="restaurant">
+                <p class="discount">50% off</p>
+                <div class="restaurant-thumbnail">
+                    <img src="img/restaurant-3.png" class="restaurant-img" alt="">
+                </div>
+                <div class="restaurant-body">
+                    <h3 class="restaurant-name">restaurant 03</h3>
+
+                    <p class="menu">Burger, Fries, Nuggets</p>
+                    <p class="place">New York</p>
+                    <span class="raiting">4.2<i class='bx bxs-star'></i></span>
+
+                    <div class="menu-button">
+                        <button class="aboutMe">Add to cart</button>
+                        <button class="hireMe">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="restaurant">
+                <p class="discount">50% off</p>
+                <div class="restaurant-thumbnail">
+                    <img src="img/restaurant-4.png" class="restaurant-img" alt="">
+                </div>
+                <div class="restaurant-body">
+                    <h3 class="restaurant-name">restaurant 04</h3>
+
+                    <p class="menu">Burger, Fries, Nuggets</p>
+                    <p class="place">New York</p>
+                    <span class="raiting">4.2<i class='bx bxs-star'></i></span>
+
+                    <div class="menu-button">
+                        <button class="aboutMe">Add to cart</button>
+                        <button class="hireMe">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="restaurant">
+                <p class="discount">50% off</p>
+                <div class="restaurant-thumbnail">
+                    <img src="img/restaurant-5.png" class="restaurant-img" alt="">
+                </div>
+                <div class="restaurant-body">
+                    <h3 class="restaurant-name">restaurant 06</h3>
+
+                    <p class="menu">Burger, Fries, Nuggets</p>
+                    <p class="place">New York</p>
+                    <span class="raiting">4.2<i class='bx bxs-star'></i></span>
+
+                    <div class="menu-button">
+                        <button class="aboutMe">Add to cart</button>
+                        <button class="hireMe">-</button>
+                    </div>
+                </div>
+            </div>
+            <div class="restaurant">
+                <p class="discount">50% off</p>
+                <div class="restaurant-thumbnail">
+                    <img src="img/restaurant-6.png" class="restaurant-img" alt="">
+                </div>
+                <div class="restaurant-body">
+                    <h3 class="restaurant-name">restaurant 06</h3>
+
+                    <p class="menu">Burger, Fries, Nuggets</p>
+                    <p class="place">New York</p>
+                    <span class="raiting">4.2<i class='bx bxs-star'></i></span>
+
+                    <div class="menu-button">
+                        <button class="aboutMe">Add to cart</button>
+                        <button class="hireMe">-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="leaf-layer left">
+            <img src="img/leaf-left.png" alt="">
+        </div>
+
+    </section>
+
+    <section id="about-section">
+
+        <div class="about-us-review-container" data-aos="zoom-in-up">
+
+            <div class="circle"></div>
+
+            <img src="img/pizza-pan.png" class="pizza-pan-img" alt="">
+
+            <div class="reviews-container">
+                <div class="review-wrapper" style="--aos-delay: 250ms">
+                    <img src="img/user-1.jpg" class="reviewer-img" alt="">
+                    <div class="review-box">
+                        <div class="review-info">
+                            <div class="reviewer">
+                                <div class="reviewer-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star-half'></i>
+                                    <p>4.5</p>
+                                </div>
+                                <h2 class="reviewer-name">Darshan</h2>
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <i class='bx bxs-quote-left'></i>
+                            <p class="review">The Restaurent was good. Staff was very wlcoming and helping nature and
+                                well maintained dress up.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-wrapper" style="--aos-delay: 300ms">
+                    <img src="img/user-2.jpg" class="reviewer-img" alt="">
+                    <div class="review-box">
+                        <div class="review-info">
+                            <div class="reviewer">
+                                <div class="reviewer-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star-half'></i>
+                                    <p>4.5</p>
+                                </div>
+                                <h2 class="reviewer-name">Sheetal</h2>
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <i class='bx bxs-quote-left'></i>
+                            <p class="review">The Restaurent was good. Staff was very wlcoming and helping nature and
+                                well maintained dress up.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-wrapper" style="--aos-delay: 350ms">
+                    <img src="img/user-4.jpg" class="reviewer-img" alt="">
+                    <div class="review-box">
+                        <div class="review-info">
+                            <div class="reviewer">
+                                <div class="reviewer-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star-half'></i>
+                                    <p>4.5</p>
+                                </div>
+                                <h2 class="reviewer-name">Amit</h2>
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <i class='bx bxs-quote-left'></i>
+                            <p class="review">The Restaurent was good. Staff was very wlcoming and helping nature and
+                                well maintained dress up.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-wrapper" style="--aos-delay: 400ms">
+                    <img src="img/user-3.jpg" class="reviewer-img" alt="">
+                    <div class="review-box">
+                        <div class="review-info">
+                            <div class="reviewer">
+                                <div class="reviewer-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star-half'></i>
+                                    <p>4.5</p>
+                                </div>
+                                <h2 class="reviewer-name">Binal</h2>
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <i class='bx bxs-quote-left'></i>
+                            <p class="review">The Restaurent was good. Staff was very wlcoming and helping nature and
+                                well maintained dress up.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-wrapper" style="--aos-delay: 450ms">
+                    <img src="img/user-5.jpg" class="reviewer-img" alt="">
+                    <div class="review-box">
+                        <div class="review-info">
+                            <div class="reviewer">
+                                <div class="reviewer-rating">
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star'></i>
+                                    <i class='bx bxs-star-half'></i>
+                                    <p>4.5</p>
+                                </div>
+                                <h2 class="reviewer-name">Derek</h2>
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <i class='bx bxs-quote-left'></i>
+                            <p class="review">The Restaurent was good. Staff was very wlcoming and helping nature and
+                                well maintained dress up.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="about">
+            <h2 class="about-title">Why Us?</h2>
+            <p class="about-info">We serves the best in taste. Our customers is no 1 priority.</p>
+
+            <div class="services-container">
+                <div class="service">
+                    <div class="service-title">
+                        <img src="img/fastest-delivery.png" class="service-img" alt="">
+                        <h3 class="service-name">Fastest Delivery</h3>
+                    </div>
+                    <p class="service-detail">Ensure that the version of Font Awesome you're using.</p>
+                </div>
+
+                <div class="service">
+                    <div class="service-title">
+                        <img src="img/best-prices.png" class="service-img" alt="">
+                        <h3 class="service-name">Best Prices</h3>
+                    </div>
+                    <p class="service-detail">Ensure that the version of Font Awesome you're using.</p>
+                </div>
+
+                <div class="service">
+                    <div class="service-title">
+                        <img src="img/20+ restaurant.png" class="service-img" alt="">
+                        <h3 class="service-name">20+ Restaurents</h3>
+                    </div>
+                    <p class="service-detail">Ensure that the version of Font Awesome you're using.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section id="faq-section">
+
+        <h1 class="section-title">Frequently Ask Questions</h1>
+
+        <div class="faq">
+            <div class="question-box">
+                <h3 class="question">How can I cancel my reservation ?</h3>
+                <i class='bx bx-plus'></i>
+            </div>
+            <div class="answer-box">
+                <p class="answer">The Restaurent was good. Staff was very wlcoming and helping nature and well
+                    maintained dress up.</p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question-box">
+                <h3 class="question">How can I change delivery address after order placement ?</h3>
+                <i class='bx bx-plus'></i>
+            </div>
+            <div class="answer-box">
+                <p class="answer">The Restaurent was good. Staff was very wlcoming and helping nature and well
+                    maintained dress up.</p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question-box">
+                <h3 class="question">How can I contact my delivery person ?</h3>
+                <i class='bx bx-plus'></i>
+            </div>
+            <div class="answer-box">
+                <p class="answer">The Restaurent was good. Staff was very wlcoming and helping nature and well
+                    maintained dress up.</p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="question-box">
+                <h3 class="question">My payment is declining. What should I do ?</h3>
+                <i class='bx bx-plus'></i>
+            </div>
+            <div class="answer-box">
+                <p class="answer">The Restaurent was good. Staff was very wlcoming and helping nature and well
+                    maintained dress up.</p>
+            </div>
+        </div>
+
+        <div class="dish-layer right"><img src="img/side-dish.png" alt=""></div>
+
+    </section>
+
+    <!-- Download App Section -->
+
+    <section id="download-app-section">
+
+        <div class="section">
+
+            <div class="download-app-image-container">
+                <div class="pulse" data-aos="zoom-in-up">
+                    <div class="circle pulse-animate"></div>
+                    <div class="circle"></div>
+                </div>
+                <img src="img/leafs.png" data-aos="zoom-in" data-aos-delay="200" class="leaf left" alt="">
+                <img src="img/leaf-left.png" data-aos="zoom-in" data-aos-delay="300" class="leaf right" alt="">
+
+                <img src="img/app.png" data-aos="phone-mockup-fade" data-aos-delay="200" class="phone-mockup" alt="">
+            </div>
+
+            <div class="section-detail">
+                <span class="section-highlight">Dwnload our app to stay updated<span class="coming-soon"> (Coming
+                        Soon)</span></span>
+                <p class="section-title">Make orders from your phone</p>
+                <p class="section-info">Get extra feature on app including tracking order, managing account and much
+                    more.</p>
+
+                <div class="download-btn-group">
+                    <a href="#" class="download-btn"></a><img src="img/play-store.png" alt=""></a>
+                    <a href="#" class="download-btn"></a><img src="img/app-store.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!--discount banner  -->
+
+    <div class="discount-banner" data-aos="flip-up">
+        <div class="section-detail">
+            <h1 class="section-title">Get an extra 20% off on your first order</h1>
+            <p class="section-info">Use this code during checkout</p>
+            <p class="discount-code">WELCOME20</p>
+        </div>
+
+        <div class="dish-slide">
+            <img src="img/discount-food-slider-1.png" alt="">
+            <img src="img/hero-pizza.png" alt="">
+            <img src="img/hero-burger.png" alt="">
+        </div>
+
+    </div>
+
+    <section id="footer">
+
+        <div class="company-info">
+            <img src="img/footer-logo.png" class="logo" alt="">
+
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-discord"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+            <div class="download-btn-group">
+                <a href="#" class="download-btn"></a><img src="img/play-store.png" alt=""></a>
+                <a href="#" class="download-btn"></a><img src="img/app-store.png" alt=""></a>
+            </div>
+        </div>
+
+        <div class="useful-links footer-links-container">
+            <h5 class="footer-links-title">Useful Links</h5>
+            <a href="#" class="footer-links">Menu</a>
+            <a href="#" class="footer-links">Restaurents</a>
+            <a href="#" class="footer-links">Your orders</a>
+            <a href="#" class="footer-links">Track Order</a>
+            <a href="#" class="footer-links">Support</a>
+        </div>
+
+        <div class="information footer-links-container">
+            <h5 class="footer-links-title">information</h5>
+            <a href="#" class="footer-links">About us</a>
+            <a href="#" class="footer-links">Privacy Policy</a>
+            <a href="#" class="footer-links">Terms & Condition</a>
+            <a href="#" class="footer-links">What info we collect</a>
+        </div>
+
+        <div class="contact footer-links-container">
+            <h5 class="footer-links-title">Contact Us</h5>
+            <p class="footer-text">Our main restaurant is located on Street 231, NYC</p>
+            <p class="footer-text">Phone - +91 1234567890</p>
+            <p class="footer-text">Email - help@campuscuisine.com</p>
+        </div>
+
+        <div class="payment-patners">
+            <img src="img/visa.png" alt="">
+            <img src="img/master-card.png" alt="">
+            <img src="img/paypal.png" alt="">
+            <img src="img/stripe.png" alt="">
+            <img src="img/apple-pay.png" alt="">
+            <img src="img/google-pay.png" alt="">
+        </div>
+
+        <p class="payment-patners-text">Fully secured payment gateways by trusted compainies</p>
+
+        <p class="copyright">Designed & by @Campus Cuisine</p>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
